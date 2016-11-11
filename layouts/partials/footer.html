@@ -1,24 +1,5 @@
-<!-- {{ if isset .Site.Params "highlight" }}
-<script src="{{ .Site.BaseURL }}/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-{{ end }} -->
 {{ if isset .Site.Params "highlight" }}
 <script>
-// // Load Scripts
-// function loadScript (url, async) {
-//   return new Promise(function (resolve, reject) {
-//     var script = document.createElement('script');
-//     script.src = url;
-//     if (typeof async !== 'undefined') {
-//       script.async = async;
-//     }
-//
-//     script.onerror = reject;
-//     script.onload = resolve;
-//     document.head.appendChild(script);
-//     hljs.initHighlightingOnLoad();
-//   });
-// }
 // Load Scripts
 function loadScript(url, callback) {
   var script = document.createElement('script');

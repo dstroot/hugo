@@ -11,10 +11,6 @@
       {{ .Content }}
     </div>
 
-    {{ if and (isset .Site.Params "disqusShortname") (ne .Site.Params.disqusShortname "") }}
-      {{ partial "disqus.html" . }}
-    {{ end }}
-
   </div>
 
   {{ partial "footer.html" . }}

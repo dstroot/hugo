@@ -4,15 +4,28 @@
   {{ partial "sidebar.html" . }}
 
   <div class="content container">
-    <ul class="posts">
-        {{ range .Data.Pages }}
-        <li>
-          <span><a href="{{ .Permalink }}">{{ .Title }}</a> <time class="pull-right post-list">{{ .Date.Format "Mon, Jan 2, 2006" }}</time></span>
-        </li>
-        {{ end }}
-    </ul>
-  </div>
+    <div class="blog-archives">
 
+      {{ $now := .Date.Format "2006" }}
+      {{ $.Scratch.Set "year" $now }}
+      <h1>{{ $.Scratch.Get "year" }}</h1>
+
+      {{ range .Data.Pages }}
+        {{ $thisYear := .Date.Format "2006" }}
+        {{ $year := $.Scratch.Get "year" }}
+        {{ if ne $year $thisYear }}
+          {{ $.Scratch.Set "year" $thisYear }}
+          <h1>{{ $.Scratch.Get "year" }}</h1>
+        {{end}}
+        <article>
+          <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+          <time><span class="month">{{ .Date.Format "Jan" }}</span>&nbsp;<span class="day">{{ .Date.Format "2" }}</span></time>
+        </article>
+      {{ end }}
+
+    </div>
+
+  </div>
   {{ partial "footer.html" . }}
 
 </body>
