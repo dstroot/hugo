@@ -1,11 +1,11 @@
 name = "Hugo"
 license = "MIT"
 licenselink = "https://github.com/dstroot/hugo/LICENSE"
-description = "An elegant open source and mobile first theme"
+description = "An elegant open source mobile first theme"
 homepage = "https://github.com/dstroot/hugo"
 tags = ["blog"]
 features = ["blog"]
-min_version = 0.14
+min_version = 0.17
 
 [author]
     name = "Dan Stroot"
