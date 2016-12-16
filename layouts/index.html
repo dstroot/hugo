@@ -20,19 +20,25 @@
         {{ end }}
         </span>
 
+        <!-- Content -->
+        <div class="post-content">
         {{ if eq .Site.Params.truncate false }}
         {{ .Content }}
         {{ else if .Description }}
         <p>{{ .Description }}</p>
-        <a href="{{ .Permalink }}">Read On <span class="icon-chevron-circle-right"></span></a>
+        <a class="button button-next" href="{{ .Permalink }}">Read On <span class="icon-chevron-circle-right"></span></a>
         {{ else }}
         {{ .Summary }}
-        {{ if .Truncated }}<a href="{{ .Permalink }}">Read On <span class="icon-chevron-circle-right"></span></a>{{ end }}
+        {{ if .Truncated }}<a class="button button-next" href="{{ .Permalink }}">Read On <span class="icon-chevron-circle-right"></span></a>{{ end }}
         {{ end }}
+        </div>
+
         <hr class="soften">
+
       </div>
       {{ end }}
 
+      <!-- Pagination -->
       {{ if gt $paginator.TotalPages 1 }}
       <ul class="pagination">
           <!-- {{ with $paginator.First }}
@@ -42,7 +48,7 @@
           {{ end }} -->
           <li
           {{ if not $paginator.HasPrev }}class="disabled"{{ end }}>
-          <a href="{{ if $paginator.HasPrev }}{{ $paginator.Prev.URL }}{{ end }}" aria-label="Previous"><span class="icon-chevron-circle-left"></span> Newer Posts</a>
+          <a classs="button button-next" href="{{ if $paginator.HasPrev }}{{ $paginator.Prev.URL }}{{ end }}" aria-label="Previous"><span class="icon-chevron-circle-left"></span> Newer Posts</a>
           </li>
 
           <!-- {{ range $paginator.Pagers }}
@@ -51,7 +57,7 @@
           {{ end }} -->
           <li
           {{ if not $paginator.HasNext }}class="disabled"{{ end }}>
-          <a href="{{ if $paginator.HasNext }}{{ $paginator.Next.URL }}{{ end }}" aria-label="Next">Older Posts <span class="icon-chevron-circle-right"></span></a>
+          <a classs="button button-previous" href="{{ if $paginator.HasNext }}{{ $paginator.Next.URL }}{{ end }}" aria-label="Next">&nbsp;&nbsp;Older Posts <span class="icon-chevron-circle-right"></span></a>
           </li>
           <!-- {{ with $paginator.Last }}
           <li>

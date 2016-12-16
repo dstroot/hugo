@@ -1,50 +1,10 @@
 {{ if isset .Site.Params "highlight" }}
+<script src='{{ .Site.BaseURL }}/js/loadjs.min.js'></script>
 <script>
-// Load Scripts
-function loadScript(url, callback) {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.charset = 'utf8';
-  if (script.readyState) { //IE
-    script.onreadystatechange = function() {
-      if (script.readyState == 'loaded' || script.readyState == 'complete') {
-        script.onreadystatechange = null;
-        if (typeof callback === 'function') {
-          callback();
-        }
-      }
-    };
-  } else { //other browers
-    script.onload = function() {
-      script.onload = null;
-      if (typeof callback === 'function') {
-        callback();
-      }
-    };
-  }
-  script.src = url;
-  document.getElementsByTagName('head')[0].appendChild(script);
-}
-// Load Styles
-function loadStyles (url) {
-  return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
-    xhr.returnType = 'text';
-    xhr.onload = function () {
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = url;
-      document.head.appendChild(link);
-      resolve();
-    };
-    xhr.onerror = reject;
-    xhr.open('get', url);
-    xhr.send();
+  // Use loadjs to load highlight.js css and js code asyncronously in parallel and then initialize highlight.js
+  loadjs(['{{.Site.BaseURL }}/css/highlight/{{.Site.Params.highlight}}.css', '{{ .Site.BaseURL }}/js/highlight.pack.js'], {
+    success: function () { hljs.initHighlightingOnLoad(); },
+    error: function (pathsNotFound) { console.log('file not found'); }
   });
-}
-loadStyles('{{.Site.BaseURL }}/css/highlight/{{.Site.Params.highlight}}.css');
-loadScript('{{ .Site.BaseURL }}/js/highlight.pack.js', function() {
-  hljs.initHighlightingOnLoad();
-});
 </script>
 {{ end }}
