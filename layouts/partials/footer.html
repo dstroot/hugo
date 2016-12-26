@@ -2,9 +2,10 @@
 <script src='{{ .Site.BaseURL }}/js/loadjs.min.js'></script>
 <script>
   // Use loadjs to load highlight.js css and js code asyncronously in parallel and then initialize highlight.js
-  loadjs(['{{.Site.BaseURL }}/css/highlight/{{.Site.Params.highlight}}.css', '{{ .Site.BaseURL }}/js/highlight.pack.js'], {
+  loadjs(['{{.Site.BaseURL }}/css/highlight/{{.Site.Params.highlight}}.css', '{{ .Site.BaseURL }}/js/highlight.pack.js', '{{ .Site.BaseURL }}/js/service-worker-registration.js'], {
     success: function () { hljs.initHighlightingOnLoad(); },
     error: function (pathsNotFound) { console.log('file not found'); }
   });
 </script>
 {{ end }}
+<!-- <script src='{{ .Site.BaseURL }}js/service-worker-registration.js'></script> -->
