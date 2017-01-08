@@ -1,11 +1,15 @@
-{{ if isset .Site.Params "highlight" }}
 <script src='{{ .Site.BaseURL }}/js/loadjs.min.js'></script>
+{{ if isset .Site.Params "highlight" }}
 <script>
   // Use loadjs to load highlight.js css and js code asyncronously in parallel and then initialize highlight.js
-  loadjs(['{{.Site.BaseURL }}/css/highlight/{{.Site.Params.highlight}}.css', '{{ .Site.BaseURL }}/js/highlight.pack.js', '{{ .Site.BaseURL }}/js/service-worker-registration.js'], {
+  loadjs(['{{.Site.BaseURL }}/css/highlight/{{.Site.Params.highlight}}.css', '{{ .Site.BaseURL }}/js/highlight.pack.js'], {
     success: function () { hljs.initHighlightingOnLoad(); },
     error: function (pathsNotFound) { console.log('file not found'); }
   });
 </script>
 {{ end }}
-<!-- <script src='{{ .Site.BaseURL }}js/service-worker-registration.js'></script> -->
+<!-- <script>
+  loadjs(['{{ .Site.BaseURL }}/js/service-worker-registration.js'], {
+    error: function (pathsNotFound) { console.log('file not found'); }
+  });
+</script> -->

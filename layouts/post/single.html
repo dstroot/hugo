@@ -9,7 +9,7 @@
       <h1 class="post-title">{{ .Title }}</h1>
 
       <!-- Post Meta -->
-      <span class="post-date">{{ .Date.Format "January 2, 2006" }}{{ if not .Site.Params.hideReadingTime }} &middot; <span class="icon-clock-o"></span> {{ .ReadingTime }} minute read{{ end }}{{ if .Site.Params.disqusShortname }} &middot; <a href="{{ .Permalink }}#disqus_thread">Comments</a> <!-- &middot; {{.WordCount}} words --> {{ end }}
+      <span class="post-date">{{ .Date.Format "January 2, 2006" }}{{ if not .Site.Params.hideReadingTime }} &middot; <span class="icon-clock-o"></span> {{ .ReadingTime }} minute read{{ end }}{{ if .Site.DisqusShortname }} &middot; <a href="{{ .Permalink }}#disqus_thread">Comments</a> <!-- &middot; {{.WordCount}} words --> {{ end }}
       {{ if isset .Params "categories" }}
       <br/>
       {{ range .Params.categories }}<a class="label" href="{{ "/categories/" | absURL }}{{ . | urlize }}">{{ . }}</a>{{ end }}
@@ -24,33 +24,25 @@
 
     <ul class="pagination">
       {{ if .NextInSection }}
-      <li><a class="button button-previous" href="{{.NextInSection.Permalink}}"><span class="icon-chevron-circle-left"></span> Previous Post</a></li>
+      <li><a class="" href="{{.NextInSection.Permalink}}"><span class="icon-chevron-circle-left"></span> Previous Post</a></li>
       {{ end }}
       {{ if .PrevInSection }}
-      <li><a class="button button-next" href="{{.PrevInSection.Permalink}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next Post <span class="icon-chevron-circle-right"></span></a></li>
+      <li><a class="" href="{{.PrevInSection.Permalink}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next Post <span class="icon-chevron-circle-right"></span></a></li>
       {{ end }}
     </ul>
 
     <hr class="soften">
 
-    {{ if .Site.Params.disqusShortname }}<div id="disqus_thread"></div>{{ end }}
+    {{ if .Site.DisqusShortname }}
+    <!-- {{ template "_internal/disqus.html" . }} -->
+    {{ partial "disqus.html" . }}
+    {{ end }}
+
   </div>
 
-  {{ with .Site.Params.disqusShortname }}
-  <script type="text/javascript">
-  var disqus_shortname = {{ . }};
-  (function () {
-      var s = document.createElement('script'); s.async = true;
-      s.type = 'text/javascript';
-      s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-  }());
-  </script>
-  {{ end }}
-
-  {{ if and (isset .Site.Params "disqusShortname") (ne .Site.Params.disqusShortname "") }}
-    {{ partial "disqus.html" . }}
-  {{ end }}
+  {{ if .Site.DisqusShortname }}
+  <script id="dsq-count-scr" src="//{{ .Site.DisqusShortname }}.disqus.com/count.js" async></script>
+  {{end}}
 
 {{ partial "footer.html" . }}
 
