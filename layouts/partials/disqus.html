@@ -10,9 +10,9 @@
     // RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
     // LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
     var disqus_config = function () {
-      this.page.url = '{{with .GetParam "disqus_url" }}{{ . | html  }}{{ else }}{{ .Permalink }}{{end}}';
-      this.page.identifier = '{{with .GetParam "disqus_identifier" }}{{ . }}{{ else }}{{ .Permalink }}{{end}}';
-      this.page.title = '{{with .GetParam "disqus_title" }}{{ . }}{{ else }}{{ .Title }}{{end}}';
+      this.page.url = '{{with .Param "disqus_url" }}{{ . | html  }}{{ else }}{{ .Permalink }}{{end}}';
+      this.page.identifier = '{{with .Param "disqus_identifier" }}{{ . }}{{ else }}{{ .Permalink }}{{end}}';
+      this.page.title = '{{with .Param "disqus_title" }}{{ . }}{{ else }}{{ .Title }}{{end}}';
     };
 
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
